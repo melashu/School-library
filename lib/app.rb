@@ -66,6 +66,17 @@ class App
     puts
   end
 
+  def create_person
+    print 'Do you wants to create a studnet (1) or a teacher (2)? [Input the number] '
+    option = gets.chomp
+    case option
+    when '1'
+      create_student
+    when '2'
+      create_teacher
+    end
+  end
+
   def create_rental(_msg = '')
     if @books.empty?
       puts 'Sorry there are no books!'
@@ -101,7 +112,7 @@ class App
     puts "#{msg} "
     puts 'Select a books from the following list by number'
     @books.each_with_index do |book, index|
-      puts "#{index}) Title: \"#{book.title}\", Author: #{book.author}"
+      puts %(#{index} Title: "#{book.title}", Author:#{book.author})
     end
     book_option = gets.chomp.to_i
     book_rental("Please select from 0 to #{@persons.size - 1}") if book_option >= @books.size || book_option.negative?
@@ -115,7 +126,7 @@ class App
     print 'Rentals: '
     puts
     @rentals.each do |rental|
-      puts "Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.person.name}" if rental.person.id.eql? id
+      puts %(Date: #{rental.date}, Book "#{rental.book.title}" by #{rental.person.name}) if rental.person.id.eql? id
     end
     puts
   end
